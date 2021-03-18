@@ -1,0 +1,32 @@
+
+  @1:{
+  0
+  31, 0, 7, 0,1,10,0,0
+  31,14,11, 6,1, 0,0,0,""}
+
+# *0{@1o2l8}
+# *10{b- r  d  r   b->r  d  r   b->r  d  r   b->r  d  r   b- r  d  r<   b- r  d  r<   b- r  d  r<   b- r  d  r}
+# *11{r  c  r  f   r> c  r  f   r> c  r  f   r> c  r  f   r  f  r  c<   r  f  r  c<   r  f  r  c<   r  f  r  c}
+# *20{g  r  b- r   g  r  b->r   g  r  b->r   g  r  b->r   g  r< b- r    g  r< b- r    g  r< b- r    g  r  b- r}
+# *21{r  a  r  d   r  a  r> d   r  a  r> d   r  a  r> d   r  d< r  a    r  d< r  a    r  d< r  a    r  d  r  a}
+# *30{g  r  e- r   g  r> e- r   g  r> e- r   g  r> e- r   g  r  e-<r    g  r  e-<r    g  r  e-<r    g  r  e- r}
+# *31{r  b- r  f   r  b->r  f   r  b->r  f   r  b->r  f   r  f  r< b-   r  f  r< b-   r  f  r< b-   r  f  r  b-}
+# *40{a  r  f  r   a> r  f  r   a> r  f  r   a> r  f  r   a  r  f  r<   a  r  f  r<   a  r  f  r<   a  r  f  r}
+# *41{r  c  r  g   r> c  r  g   r> c  r  g   r> c  r  g   r  g  r  c<   r  g  r  c<   r  g  r  c<   r  g  r  c}
+# *50{f+ r  c+ r   f+ r> c+ r   f+ r> c+ r   f+ r> c+ r   f+ r  c+<r    f+ r  c+<r    f+ r  c+<r    f+ r  c+ r}
+# *51{r  b- r  f   r  b->r  f   r  b->r  f   r  b->r  f   r  f  r< b-   r  f  r< b-   r  f  r< b-   r  f  r  b-}
+# *60{a- r  e- r   a->r  e- r   a->r  e- r   a->r  e- r   a- r  e- r<   a- r  e- r<   a- r  e- r<   a- r  e- r}
+# *61{r  c  r  g   r> c  r  g   r> c  r  g   r> c  r  g   r  g  r  c<   r  g  r  c<   r  g  r  c<   r  g  r  c}
+
+# *100{b- c  d  f   b->c  d  f   b->c  d  f   b->c  d  f   b- f  d  c<   b- f  d  c<   b- f  d  c<   b- f  d  c}
+# *101{g  a  b- d   g  a  b->d   g  a  b->d   g  a  b->d   g  d< b- a    g  d< b- a    g  d< b- a    g  d  b- a}
+# *102{g  b- e- f   g  b->e- f   g  b->e- f   g  b->e- f   g  f  e-<b-   g  f  e-<b-   g  f  e-<b-   g  f  e- b-}
+# *103{a  c  f  g   a> c  f  g   a> c  f  g   a> c  f  g   a  g  f  c<   a  g  f  c<   a  g  f  c<   a  g  f  c}
+# *104{f+ b- c+ f   f+ b->c+ f   f+ b->c+ f   f+ b->c+ f   f+ f  c+<b-   f+ f  c+<b-   f+ f  c+<b-   f+ f  c+ b-}
+# *105{a- c  e- g   a->c  e- g   a->c  e- g   a->c  e- g   a- g  e- c<   a- g  e- c<   a- g  e- c<   a- g  e- c}
+
+A T200
+A *0v15 L*10*20*30*40*50*60
+a *0v15 L*11*21*31*41*51*61
+;A *0v15    *100*101*102*103;*104*105
+;a *0v11r8. *100*101*102*103;*104*105
