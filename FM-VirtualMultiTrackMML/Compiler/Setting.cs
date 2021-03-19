@@ -109,12 +109,12 @@ namespace FM_VirtualMultiTrackMML
 									var UpDown = c.Substring(oChar, nChar);
 									if (UpDown == cVOLUME_UPDOWN_False){
 										Setting = eKind.VOLUME_UPDOWN;
-										mbOctaveSwap = false;
+										mbVolumeSwap = false;
 										return true;
 									}
 									if (UpDown == cVOLUME_UPDOWN_True){
 										Setting = eKind.VOLUME_UPDOWN;
-										mbOctaveSwap = true;
+										mbVolumeSwap = true;
 										return true;
 									}
 									
