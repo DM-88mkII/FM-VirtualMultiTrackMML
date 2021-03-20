@@ -289,10 +289,12 @@ namespace FM_VirtualMultiTrackMML
 											}
 											case (int)Packet.eCommand.vUp:{
 												mAbsoluteVolume.Value += Packet.Value;
+												mRegister.aOP[1].TL.Value = s_aValue_TL[mAbsoluteVolume.Clamp];
 												break;
 											}
 											case (int)Packet.eCommand.vDown:{
 												mAbsoluteVolume.Value -= Packet.Value;
+												mRegister.aOP[1].TL.Value = s_aValue_TL[mAbsoluteVolume.Clamp];
 												break;
 											}
 										}

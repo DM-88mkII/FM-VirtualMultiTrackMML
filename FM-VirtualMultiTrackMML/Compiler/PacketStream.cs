@@ -517,13 +517,17 @@ namespace FM_VirtualMultiTrackMML
 							}
 							case (int)eFunction.yFB:{
 								int Value = 0;
-								if (c.GetValue(ref Value, true)){
-									if (Value >= 0 && Value <= 7){
-										maPacket.Add(new Packet(Packet.eCommand.yFB, Value, Callstack_oPrev, oCallstackLogger));
-										break;
+								if (c.IsMark(',', true) > 0){
+									if (c.GetValue(ref Value, true)){
+										if (Value >= 0 && Value <= 7){
+											maPacket.Add(new Packet(Packet.eCommand.yFB, Value, Callstack_oPrev, oCallstackLogger));
+											break;
+										}
 									}
+									Console.WriteLine($"!! Error !! : Illegal parameter");
+								} else {
+									Console.WriteLine($"!! Error !! : Syntax error");
 								}
-								Console.WriteLine($"!! Error !! : Illegal parameter");
 								Callstack_oText = Callstack_oPrev;
 								Result = false;
 								break;
