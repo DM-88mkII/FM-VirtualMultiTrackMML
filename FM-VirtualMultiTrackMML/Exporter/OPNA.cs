@@ -15,12 +15,12 @@ namespace FM_VirtualMultiTrackMML
 	{
 		public static readonly byte s_Reg_KeyOn = 0x28;
 		public static readonly byte[] s_aValue_Ch = new byte[]{
-			0x00,	// Ch.0
-			0x01,	// Ch.1
-			0x02,	// Ch.2
-			0x04,	// Ch.3
-			0x05,	// Ch.4
-			0x06,	// Ch.5
+			0x00,	// Ch.1
+			0x01,	// Ch.2
+			0x02,	// Ch.3
+			0x04,	// Ch.4
+			0x05,	// Ch.5
+			0x06,	// Ch.6
 		};
 		public static readonly byte[] s_aValue_KeyOn = new byte[]{
 			0x30,	// Op1,Op2
@@ -68,8 +68,8 @@ namespace FM_VirtualMultiTrackMML
 		public static readonly byte s_Reg_LR_AMS_PMS = 0xb4;
 		
 		public static readonly byte[] s_aaReg_Block_FNumber = new byte[]{
-			0xa0,	// Low
-			0xa4,	// High
+			0xa0,	// F-Num1
+			0xa4,	// Block/F-Num2
 		};
 		public static ushort[] s_aValue_Block_FNumber = new ushort[]{
 		//	c       c+      d       d+      e       f       f+      g       g+      a       a+      b
