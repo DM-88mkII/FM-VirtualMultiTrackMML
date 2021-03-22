@@ -72,7 +72,7 @@ namespace FM_VirtualMultiTrackMML
 				
 				
 				
-				public bool Tick(ref StringBuilder Queue, ref int Clock, int Channel, int oTrack, bool[] aKeyOn, out bool bScale)
+				public bool Tick(ref StringBuilder Queue, ref int Clock, int Channel, int oTrack, bool[] aKeyOn, out bool bScale, ref Register.Param KeyOn)
 				{
 					var oTrackSelf = oTrack;
 					var oTrackPair = oTrack ^ 1;
@@ -86,7 +86,7 @@ namespace FM_VirtualMultiTrackMML
 							Duration(ref Queue, ref Clock, false);
 							
 							aKeyOn[oTrackSelf] = false;
-							KeyOn(ref Queue, Channel, aKeyOn, oTrackSelf, oTrackPair);
+							AppendKeyOn(ref Queue, Channel, aKeyOn, oTrackSelf, oTrackPair, ref KeyOn);
 							
 							mb1st = false;
 						}
@@ -107,7 +107,7 @@ namespace FM_VirtualMultiTrackMML
 										mClock = (Packet.Value > 0)? Packet.Value: 0x100;
 										if (!mbSlur){
 											aKeyOn[oTrackSelf] = true;
-											KeyOn(ref Queue, Channel, aKeyOn, oTrackSelf, oTrackPair);
+											AppendKeyOn(ref Queue, Channel, aKeyOn, oTrackSelf, oTrackPair, ref KeyOn);
 										}
 										bScale = true;
 										bBreak = true;
@@ -118,7 +118,7 @@ namespace FM_VirtualMultiTrackMML
 												mClock = (Packet.Value > 0)? Packet.Value: 0x100;
 												
 												aKeyOn[oTrackSelf] = false;
-												KeyOn(ref Queue, Channel, aKeyOn, oTrackSelf, oTrackPair);
+												AppendKeyOn(ref Queue, Channel, aKeyOn, oTrackSelf, oTrackPair, ref KeyOn);
 												bBreak = true;
 												break;
 											}
@@ -360,13 +360,14 @@ namespace FM_VirtualMultiTrackMML
 				
 				
 				
-				void KeyOn(ref StringBuilder Queue, int Channel, bool[] aKeyOn, int oTrackSelf, int oTrackPair)
+				void AppendKeyOn(ref StringBuilder Queue, int Channel, bool[] aKeyOn, int oTrackSelf, int oTrackPair, ref Register.Param KeyOn)
 				{
 					var Register = OPNA.s_Reg_KeyOn;
 					int Value = OPNA.s_aValue_Ch[Channel];
 					Value |= (aKeyOn[oTrackSelf])? OPNA.s_aValue_KeyOn[oTrackSelf]: 0;
 					Value |= (aKeyOn[oTrackPair])? OPNA.s_aValue_KeyOn[oTrackPair]: 0;
-					Append(ref Queue, Register, Value);
+					KeyOn.Value = Value;
+					if (KeyOn.IsModified) Append(ref Queue, Register, KeyOn.Value);
 				}
 			}
 			
@@ -429,6 +430,7 @@ namespace FM_VirtualMultiTrackMML
 					var Block_FNumber = new Register.Param();
 					var DT_MT_0 = new Register.Param();
 					var DT_MT_1 = new Register.Param();
+					var KeyOn = new Register.Param();
 					
 					while (Result && !(abTerm[0] && abTerm[1])){
 						++Clock;
@@ -436,7 +438,7 @@ namespace FM_VirtualMultiTrackMML
 						{	// 
 							int oTrack = 0;
 							foreach (var t in maTrack){
-								Result = t.Tick(ref Queue, ref Clock, Channel, oTrack, aKeyOn, out abScale[oTrack]);
+								Result = t.Tick(ref Queue, ref Clock, Channel, oTrack, aKeyOn, out abScale[oTrack], ref KeyOn);
 								if (Result){
 									abTerm[oTrack] = t.IsTerm;
 									++oTrack;
