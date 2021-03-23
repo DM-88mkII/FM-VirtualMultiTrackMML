@@ -37,7 +37,6 @@ namespace FM_VirtualMultiTrackMML
 				public bool mbRevervMode = false;	// todo
 				
 				public bool mbLoop = false;
-				public bool mbLoopMark = false;
 				
 				public Register mRegister = new Register();
 				
@@ -97,10 +96,6 @@ namespace FM_VirtualMultiTrackMML
 								if (mSequence.Pop(out Packet)){
 									if (Packet.IsScale){
 										Duration(ref Queue, ref Clock, false);
-										if (!mbLoopMark && mbLoop){
-											mbLoopMark = true;
-											Queue.Append($"L ");
-										}
 										
 										mScale = Packet.Scale;
 										mbSlur = Packet.IsSlur;
@@ -204,6 +199,8 @@ namespace FM_VirtualMultiTrackMML
 											}
 											case (int)Packet.eCommand.L:{
 												if (oTrack == 0){
+													Duration(ref Queue, ref Clock, false);
+													Queue.Append($"L ");
 													mbLoop = true;
 												}
 												break;
@@ -532,13 +529,12 @@ namespace FM_VirtualMultiTrackMML
 						}
 						
 						if (maTrack[0].mbLoop && abTerm[0]){
-							Clock = 0;
 							break;
 						}
 					}
 					
 					if (Result){
-						Duration(ref Queue, ref Clock, true);
+						Duration(ref Queue, ref Clock, !maTrack[0].mbLoop);
 					}
 				}
 				Muc = Queue.ToString();
